@@ -1,0 +1,1 @@
+// links to pages (a button of home and an icon of shopping cart)
