@@ -1,68 +1,57 @@
-import React from "react"
-import axios from 'axios'
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
+
+import { useEstado } from "../contexts/CartContext";
+import { setRandomImage } from "../utils/randomImage";
 
 const apiProdutos = axios.create({
     baseURL: "https://62d742f351e6e8f06f1a83da.mockapi.io/api/produtos"
-})
+});
 
-export default class Home extends React.Component{
-    state = {
-        produtos: [],
-        produtosProcurados: []
-    }
+export default function Home(){
+    const [produtos, setProdutos] = useState([]);
+    const [produtosProcurados, setProdutosProcurados] = useState([]);
+    const { carrinho, setCarrinho } = useEstado(); 
 
-    componentDidMount(){
-        this.getProdutos()
-    }
+    useEffect(() => {
+        getProdutos();
+    }, []);
 
-    getProdutos = async () => {
-        const response = await apiProdutos.get()
-
-        const produtosCatalogo = response.data.map((item) =>{
-            return{
+    const getProdutos = async () => {
+        const response = await apiProdutos.get();
+        const produtosCatalogo = response.data.map((item) => {
+            return {
                 ...item
-            }
-        })
+            };
+        });
+        setProdutos(produtosCatalogo);
+        setProdutosProcurados(produtosCatalogo);
+    };
 
-        this.setState({
-            produtos: produtosCatalogo,
-            produtosProcurados: produtosCatalogo
-        })
-    }
+    const handleChange = (e) => {
+        const produtosFilter = produtos.filter((item) => {
+            return item.name.toLowerCase().includes(e.target.value.toLowerCase());
+        });
+        setProdutosProcurados(produtosFilter);
+    };
 
-    handleChange = (e) => {
-        // eslint-disable-next-line array-callback-return
-        const produtosFilter = this.state.produtos.filter((item) => {
-            if(item.name.toLowerCase().includes(e.target.value.toLowerCase())){
-                return true
-            }
-        })
+    const adicionaProdutosNoCarrinho = (item) => {
+        setCarrinho((prevCarrinho) => [...prevCarrinho, item]);
+    };
 
-        this.setState({
-            produtosProcurados: produtosFilter
-        })
-    }
-
-    setRandomImage = (produto) => {
-        const random = Math.floor(Math.random() * 1000)
-        const link = produto.avatar
-        const imageLink = `${link}?random=${random}`
-        return imageLink
-    }
-
-    render(){
-        return(
+    return (
+        <div>
+            <input type="text" placeholder="Buscar Produtos" onChange={handleChange} />
             <div>
-                <input type="text" placeholder="Buscar Produtos" onChange={this.handleChange}/>
-                <div>
-                    {this.state.produtosProcurados.map((item) =>(
-                        <div key={item.id}>
-                            <p>{item.name}</p>
-                            <img src={this.setRandomImage(item)} alt={`Imagem de ${item.name}`}/>
-                        </div>
-                    ))}
-                </div>
+                {produtosProcurados.map((item) => (
+                    <div key={item.id}>
+                        <div onClick={() => adicionaProdutosNoCarrinho(item)}>+</div>
+                        <p>{item.name}</p>
+                        <img src={setRandomImage(item)} alt={`Imagem de ${item.name}`} />
+                    </div>
+                ))}
             </div>
-        )
-    }
-}
+        </div> 
+    );
+};
+
