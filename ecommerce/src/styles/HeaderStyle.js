@@ -10,6 +10,7 @@ export const NavigationBar = styled.nav`
     padding: 0 25px;
     margin-bottom: 10px;
     position: fixed;
+    z-index:1;
 
     h1{
         font-size: 5vh;
