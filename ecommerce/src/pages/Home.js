@@ -11,7 +11,7 @@ const apiProdutos = axios.create({
 export default function Home(){
     const [produtos, setProdutos] = useState([]);
     const [produtosProcurados, setProdutosProcurados] = useState([]);
-    const { setCarrinho } = useEstado(); 
+    const { carrinho, setCarrinho } = useEstado(); 
 
     useEffect(() => {
         getProdutos();
@@ -36,7 +36,18 @@ export default function Home(){
     };
 
     const adicionaProdutosNoCarrinho = (item) => {
-        setCarrinho((prevCarrinho) => [...prevCarrinho, item]);
+        //setCarrinho((prevCarrinho) => [...prevCarrinho, item]);
+
+        const itemIndex = carrinho.findIndex((cartItem) => cartItem.id === item.id);
+        
+        if (itemIndex !== -1) {
+            const newCarrinho = [...carrinho];
+            newCarrinho[itemIndex] = { ...newCarrinho[itemIndex], quantidade: newCarrinho[itemIndex].quantidade + 1 };
+            setCarrinho(newCarrinho);
+        } else {
+            const newCarrinho = [...carrinho, { ...item, quantidade: 1 }];
+            setCarrinho(newCarrinho);
+        }
     };
 
     return (

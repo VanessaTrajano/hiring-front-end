@@ -7,13 +7,17 @@ export default function Shopping(){
     const { carrinho, setCarrinho } = useEstado(); 
 
     const removeProdutosNoCarrinho = (item) => {
-         const index = carrinho.findIndex((itemDoCarrinho) => itemDoCarrinho.id === item.id);
+        const index = carrinho.findIndex((itemDoCarrinho) => itemDoCarrinho.id === item.id);
         
-         if (index !== -1) {
-             const listaCarrinho = [...carrinho];
-             listaCarrinho.splice(index, 1);
-             setCarrinho(listaCarrinho);
-         }
+        if (index !== -1) {
+            const listaCarrinho = [...carrinho];
+            if (listaCarrinho[index].quantidade > 1) {
+                listaCarrinho[index] = { ...listaCarrinho[index], quantidade: listaCarrinho[index].quantidade - 1 };
+            } else {
+                listaCarrinho.splice(index, 1);
+            }
+            setCarrinho(listaCarrinho);
+        }
     }
 
     return(
@@ -25,6 +29,7 @@ export default function Shopping(){
                         <div onClick={() => removeProdutosNoCarrinho(item)}>-</div>
                         <p>{item.name}</p>
                         <img src={setRandomImage(item)} alt={`Imagem de ${item.name}`} />
+                        <p>{item.quantidade}</p>
                     </div>
                 ))}
             </div>
