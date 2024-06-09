@@ -7,7 +7,13 @@ export default function Shopping(){
     const { carrinho, setCarrinho } = useEstado(); 
 
     const removeProdutosNoCarrinho = (item) => {
+         const index = carrinho.findIndex((itemDoCarrinho) => itemDoCarrinho.id === item.id);
         
+         if (index !== -1) {
+             const listaCarrinho = [...carrinho];
+             listaCarrinho.splice(index, 1);
+             setCarrinho(listaCarrinho);
+         }
     }
 
     return(
@@ -16,7 +22,7 @@ export default function Shopping(){
             <div>
                 {carrinho.map((item) => (
                     <div key={item.id}>
-                        <div onClick={() => removeProdutosNoCarrinho(item)}>+</div>
+                        <div onClick={() => removeProdutosNoCarrinho(item)}>-</div>
                         <p>{item.name}</p>
                         <img src={setRandomImage(item)} alt={`Imagem de ${item.name}`} />
                     </div>

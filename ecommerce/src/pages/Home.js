@@ -11,7 +11,7 @@ const apiProdutos = axios.create({
 export default function Home(){
     const [produtos, setProdutos] = useState([]);
     const [produtosProcurados, setProdutosProcurados] = useState([]);
-    const { carrinho, setCarrinho } = useEstado(); 
+    const { setCarrinho } = useEstado(); 
 
     useEffect(() => {
         getProdutos();
