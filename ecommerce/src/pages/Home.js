@@ -31,6 +31,7 @@ export default class Home extends React.Component{
     }
 
     handleChange = (e) => {
+        // eslint-disable-next-line array-callback-return
         const produtosFilter = this.state.produtos.filter((item) => {
             if(item.name.toLowerCase().includes(e.target.value.toLowerCase())){
                 return true
