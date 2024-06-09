@@ -1,7 +1,7 @@
-import Header from './components/Header/Header';
+import Header from './components/Header';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import { GlobalStyle } from './components/GlobalStyle/GlobalStyle';
+import { GlobalStyle } from './styles/GlobalStyle';
 import { CartProvider } from './contexts/CartContext';
 
 function App() {

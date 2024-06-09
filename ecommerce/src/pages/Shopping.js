@@ -22,17 +22,23 @@ export default function Shopping(){
 
     return(
         <div>
-            <p>Aqui se encontrará o conteúdo do Carrinho de compras!</p>
-            <div>
-                {carrinho.map((item) => (
-                    <div key={item.id}>
-                        <div onClick={() => removeProdutosNoCarrinho(item)}>-</div>
-                        <p>{item.name}</p>
-                        <img src={setRandomImage(item)} alt={`Imagem de ${item.name}`} />
-                        <p>{item.quantidade}</p>
+            {
+                carrinho.length === 0 ? 
+                (
+                    <p>Não há nenhum produto no seu carrinho. Vá para a página de Home e comece suas compras!</p>
+                ) : (
+                    <div>
+                        {carrinho.map((item) => (
+                            <div key={item.id}>
+                                <div onClick={() => removeProdutosNoCarrinho(item)}>-</div>
+                                <p>{item.name}</p>
+                                <img src={setRandomImage(item)} alt={`Imagem de ${item.name}`} />
+                                <p>{item.quantidade}</p>
+                            </div>
+                        ))}
                     </div>
-                ))}
-            </div>
+                )
+            }
         </div>
     )
     

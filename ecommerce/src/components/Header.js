@@ -5,10 +5,10 @@ import {
     Route
 } from 'react-router-dom'
 
-import Home from "../../pages/Home"
-import Shopping from "../../pages/Shopping"
+import Home from "../pages/Home"
+import Shopping from "../pages/Shopping"
 
-import { List, ListItem, NavigationBar } from "./HeaderStyle"
+import { List, ListItem, NavigationBar } from "../styles/HeaderStyle"
 
 export default function Header(){
     return(

@@ -36,8 +36,6 @@ export default function Home(){
     };
 
     const adicionaProdutosNoCarrinho = (item) => {
-        //setCarrinho((prevCarrinho) => [...prevCarrinho, item]);
-
         const itemIndex = carrinho.findIndex((cartItem) => cartItem.id === item.id);
         
         if (itemIndex !== -1) {
@@ -65,4 +63,3 @@ export default function Home(){
         </div> 
     );
 };
-
