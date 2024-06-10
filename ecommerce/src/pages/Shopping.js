@@ -2,10 +2,12 @@ import React from "react"
 import { useEstado } from "../contexts/CartContext";
 import { setRandomImage } from "../utils/randomImage";
 
+import { CartImages, ShoppingContainer, ProductCartContainer, ProductsCartContainer, RemoveFromCartButton, SomaPreco } from "../styles/ShoppingStyle";
+
 export default function Shopping(){
 
     const { carrinho, setCarrinho } = useEstado(); 
-
+ 
     const removeProdutosNoCarrinho = (item) => {
         const index = carrinho.findIndex((itemDoCarrinho) => itemDoCarrinho.id === item.id);
         
@@ -20,26 +22,38 @@ export default function Shopping(){
         }
     }
 
+    let price = 0
     return(
-        <div>
+        <ShoppingContainer>
             {
                 carrinho.length === 0 ? 
                 (
                     <p>Não há nenhum produto no seu carrinho. Vá para a página de Home e comece suas compras!</p>
                 ) : (
-                    <div>
+                    <ProductsCartContainer>
                         {carrinho.map((item) => (
-                            <div key={item.id}>
-                                <div onClick={() => removeProdutosNoCarrinho(item)}>-</div>
-                                <p>{item.name}</p>
-                                <img src={setRandomImage(item)} alt={`Imagem de ${item.name}`} />
-                                <p>{item.quantidade}</p>
-                            </div>
+                            <ProductCartContainer key={item.id}>
+                                <SomaPreco>{
+                                    price += Number(item.price * item.quantidade)
+                                }</SomaPreco>
+                                <CartImages src={setRandomImage(item)} alt={`Imagem de ${item.name}`} />
+                                <div>
+                                    <p>{item.quantidade}</p>
+                                    <p>{item.name}</p>
+                                    <p>{item.desciption}</p>
+                                    <p>{item.price}</p>
+                                </div>
+                                <RemoveFromCartButton onClick={() => removeProdutosNoCarrinho(item)}>
+                                    -
+                                    <span>Remover do Carrinho</span>
+                                </RemoveFromCartButton>
+                            </ProductCartContainer>
                         ))}
-                    </div>
+                    </ProductsCartContainer>
                 )
             }
-        </div>
+            <p>Preço total do carrinho = R$ {price}</p>
+        </ShoppingContainer>
     )
     
 }
