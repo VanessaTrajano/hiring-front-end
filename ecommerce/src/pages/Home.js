@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useEstado } from "../contexts/CartContext";
 import { setRandomImage } from "../utils/randomImage";
 
-import { AddToCartButton, HomeContainer, ProductContainer, ProductImage, ProductInfo, ProductsContainer } from "../styles/HomeStyle";
+import { AddToCartButton, HomeContainer, ProductContainer, ProductImage, ProductInfo, ProductName, ProductPrice, ProductsContainer, ShearchBar } from "../styles/HomeStyle";
 
 const apiProdutos = axios.create({
     baseURL: "https://62d742f351e6e8f06f1a83da.mockapi.io/api/produtos"
@@ -52,7 +52,7 @@ export default function Home(){
 
     return (
         <HomeContainer>
-            <input type="text" placeholder="Buscar Produtos" onChange={handleChange} />
+            <ShearchBar type="text" placeholder="Buscar Produtos" onChange={handleChange} />
             <ProductsContainer>
                 {produtosProcurados.map((item) => (
                     <ProductContainer key={item.id}>
@@ -61,9 +61,9 @@ export default function Home(){
                             <span>Adicionar ao Carrinho</span>
                         </AddToCartButton>
                         <ProductImage src={setRandomImage(item)} alt={`Imagem de ${item.name}`} />
-                        <ProductInfo>{item.name}</ProductInfo>
+                        <ProductName>{item.name}</ProductName>
                         <ProductInfo>{item.desciption}</ProductInfo>
-                        <ProductInfo>{item.price}</ProductInfo>
+                        <ProductPrice>R$ {item.price}</ProductPrice>
                     </ProductContainer>
                 ))}
             </ProductsContainer>
