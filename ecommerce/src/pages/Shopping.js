@@ -1,6 +1,6 @@
 import React from "react"
 import { useEstado } from "../contexts/CartContext";
-import { setRandomImage } from "../utils/randomImage";
+import { setRandomImage } from "../utils/setRandomImage";
 
 import { CartImages, ShoppingContainer, ProductCartContainer, ProductsCartContainer, RemoveFromCartButton, SomaPreco, ProductCartQuant, ProductCartName, ProductCartInfo, ProductCartPrice, TotalPrice, CartEmpty } from "../styles/ShoppingStyle";
 

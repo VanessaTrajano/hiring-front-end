@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 
 import { useEstado } from "../contexts/CartContext";
-import { setRandomImage } from "../utils/randomImage";
+import { setRandomImage } from "../utils/setRandomImage";
 
 import { AddToCartButton, HomeContainer, ProductContainer, ProductImage, ProductInfo, ProductName, ProductPrice, ProductsContainer, ShearchBar } from "../styles/HomeStyle";
 
