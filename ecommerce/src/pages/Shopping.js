@@ -1,6 +1,5 @@
 import React from "react"
 import { useEstado } from "../contexts/CartContext";
-import { setRandomImage } from "../utils/randomImage";
 
 import { CartImages, ShoppingContainer, ProductCartContainer, ProductsCartContainer, RemoveFromCartButton, SomaPreco, ProductCartQuant, ProductCartName, ProductCartInfo, ProductCartPrice, TotalPrice, CartEmpty } from "../styles/ShoppingStyle";
 
@@ -36,7 +35,7 @@ export default function Shopping(){
                                 <SomaPreco>{
                                     price += Number(item.price * item.quantidade)
                                 }</SomaPreco>
-                                <CartImages src={setRandomImage(item)} alt={`Imagem de ${item.name}`} />
+                                <CartImages src={item.avatar} alt={`Imagem de ${item.name}`} />
                                 <div>
                                     <ProductCartQuant>{item.quantidade}</ProductCartQuant>
                                     <ProductCartName>{item.name}</ProductCartName>

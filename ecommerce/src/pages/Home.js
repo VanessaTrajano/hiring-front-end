@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 
 import { useEstado } from "../contexts/CartContext";
-import { setRandomImage } from "../utils/randomImage";
 
 import { AddToCartButton, HomeContainer, ProductContainer, ProductImage, ProductInfo, ProductName, ProductPrice, ProductsContainer, ShearchBar } from "../styles/HomeStyle";
 
@@ -60,7 +59,7 @@ export default function Home(){
                             +
                             <span>Adicionar ao Carrinho</span>
                         </AddToCartButton>
-                        <ProductImage src={setRandomImage(item)} alt={`Imagem de ${item.name}`} />
+                        <ProductImage src={item.avatar} alt={`Imagem de ${item.name}`} />
                         <ProductName>{item.name}</ProductName>
                         <ProductInfo>{item.desciption}</ProductInfo>
                         <ProductPrice>R$ {item.price}</ProductPrice>
