@@ -2,7 +2,7 @@ import React from "react"
 import { useEstado } from "../contexts/CartContext";
 import { setRandomImage } from "../utils/randomImage";
 
-import { CartImages, ShoppingContainer, ProductCartContainer, ProductsCartContainer, RemoveFromCartButton, SomaPreco } from "../styles/ShoppingStyle";
+import { CartImages, ShoppingContainer, ProductCartContainer, ProductsCartContainer, RemoveFromCartButton, SomaPreco, ProductCartQuant, ProductCartName, ProductCartInfo, ProductCartPrice, TotalPrice, CartEmpty } from "../styles/ShoppingStyle";
 
 export default function Shopping(){
 
@@ -28,7 +28,7 @@ export default function Shopping(){
             {
                 carrinho.length === 0 ? 
                 (
-                    <p>Não há nenhum produto no seu carrinho. Vá para a página de Home e comece suas compras!</p>
+                    <CartEmpty>Não há nenhum produto no seu carrinho. Vá para a página de Home e comece suas compras!</CartEmpty>
                 ) : (
                     <ProductsCartContainer>
                         {carrinho.map((item) => (
@@ -38,10 +38,10 @@ export default function Shopping(){
                                 }</SomaPreco>
                                 <CartImages src={setRandomImage(item)} alt={`Imagem de ${item.name}`} />
                                 <div>
-                                    <p>{item.quantidade}</p>
-                                    <p>{item.name}</p>
-                                    <p>{item.desciption}</p>
-                                    <p>{item.price}</p>
+                                    <ProductCartQuant>{item.quantidade}</ProductCartQuant>
+                                    <ProductCartName>{item.name}</ProductCartName>
+                                    <ProductCartInfo>{item.desciption}</ProductCartInfo>
+                                    <ProductCartPrice>R$ {item.price}</ProductCartPrice>
                                 </div>
                                 <RemoveFromCartButton onClick={() => removeProdutosNoCarrinho(item)}>
                                     -
@@ -52,7 +52,7 @@ export default function Shopping(){
                     </ProductsCartContainer>
                 )
             }
-            <p>Preço total do carrinho = R$ {price}</p>
+            <TotalPrice>Preço total do carrinho = R$ {price.toFixed(2)}</TotalPrice>
         </ShoppingContainer>
     )
     
